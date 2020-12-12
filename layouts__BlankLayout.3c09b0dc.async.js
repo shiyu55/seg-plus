@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{Hl79:function(c,a,t){"use strict";t.r(a);var n=t("nKUr"),d=t.n(n),r=t("q1tI"),o=t.n(r),m=t("Y7cU"),_=o.a.Fragment,e=function(E){var i=E.children;return Object(n.jsx)(_,{"data-inspector-line":"7","data-inspector-column":"9","data-inspector-relative-path":"src/layouts/BlankLayout.tsx",children:i})};a.default=e}}]);
