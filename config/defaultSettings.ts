@@ -13,9 +13,10 @@ const proSettings: DefaultSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: '赛鸽 Plus',
   pwa: false,
   iconfontUrl: '',
+  //logo: 'https://img.alicdn.com/tfs/TB1GfPJxYH1gK0jSZFwXXc7aXXa-56-56.svg',
 };
 
 export type { DefaultSettings };
