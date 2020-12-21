@@ -2,7 +2,7 @@
 
 ## Features
 
-- :bulb: **人员管理模块**: A language for application-scale JavaScript
-- :scroll: **计划编排模块**: Build page with block template
+- :bulb: **人员管理模块**: 人员管理一线到底
+- :scroll: **计划编排模块**: 基于工时定额和大数据可视化基于任务计划编排
 
 
