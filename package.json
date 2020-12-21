@@ -1,8 +1,8 @@
 {
-  "name": "ant-design-pro",
+  "name": "seglus",
   "version": "4.5.0",
   "private": true,
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "赛鸽模块化工程管理系统",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
