@@ -2,6 +2,7 @@ import { Settings as ProSettings } from '@ant-design/pro-layout';
 
 type DefaultSettings = Partial<ProSettings> & {
   pwa: boolean;
+  logo: string;
 };
 
 const proSettings: DefaultSettings = {
@@ -16,7 +17,7 @@ const proSettings: DefaultSettings = {
   title: '赛鸽 Plus',
   pwa: false,
   iconfontUrl: '',
-  //logo: 'https://img.alicdn.com/tfs/TB1GfPJxYH1gK0jSZFwXXc7aXXa-56-56.svg',
+  logo: 'https://img.alicdn.com/tfs/TB1GfPJxYH1gK0jSZFwXXc7aXXa-56-56.svg',
 };
 
 export type { DefaultSettings };
