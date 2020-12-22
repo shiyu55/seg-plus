@@ -1,8 +1,16 @@
 @import '~antd/lib/style/themes/default.less';
 
-.pre {
-  margin: 12px 0;
-  padding: 12px 20px;
-  background: @input-bg;
-  box-shadow: @card-shadow;
+.mapChart {
+  height: 652px;
+  padding-top: 24px;
+  img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 437px;
+  }
+}
+@media screen and (max-width: @screen-lg) {
+  .mapChart {
+    height: auto;
+  }
 }
