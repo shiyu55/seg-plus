@@ -65,7 +65,7 @@ const defaultFooterDom = (
       {
         key: 'Ant Design Pro',
         title: ' Made with ❤ by Ant Design Pro',
-        href: 'https://pro.ant.design',
+        href: 'https://github.com/baiheinet/seg-plus',
         blankTarget: true,
       },
     ]}
