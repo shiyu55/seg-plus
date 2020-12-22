@@ -56,6 +56,25 @@
                 component: './ListTableList',
               },
               {
+                path: '/dashboard',
+                name: '驾驶仓',
+                icon: 'dashboard',
+                routes: [
+                  {
+                    name: '行政部',
+                    path: '/dashboard/admin',
+
+                    routes: [
+                      {
+                        name: '分公司行政部',
+                        path: '/dashboard/admin/admin',
+                        component: './Dashboard/admin',
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
                 component: './404',
               },
             ],
