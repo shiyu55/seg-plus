@@ -1,11 +1,7 @@
 import React from 'react';
 import { Statistic, Col, Row, Card } from 'antd';
-import { UserModelState, ConnectRC, connect, Link } from 'umi';
+import { Link } from 'umi';
 import { Chart, Tooltip, Interval } from 'bizcharts';
-
-interface PageProps {
-  admins: UserModelState;
-}
 
 const topColResponsiveProps = {
   xs: 24,
@@ -16,7 +12,7 @@ const topColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
-const UserPage: ConnectRC<PageProps> = () => {
+const UserPage = () => {
   const data = [
     { name: '已审批', month: 'Jan.', value: 20 },
     { name: '已审批', month: 'Feb.', value: 28 },
@@ -92,4 +88,4 @@ const UserPage: ConnectRC<PageProps> = () => {
   );
 };
 
-export default connect(({ admins }: { admins: UserModelState }) => ({ admins }))(UserPage);
+export default UserPage;
