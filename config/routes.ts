@@ -34,30 +34,8 @@
                 component: './Welcome',
               },
               {
-                path: '/admin',
-                name: 'admin',
-                icon: 'crown',
-                component: './Admin',
-                authority: ['admin'],
-                routes: [
-                  {
-                    path: '/admin/sub-page',
-                    name: 'sub-page',
-                    icon: 'smile',
-                    component: './Welcome',
-                    authority: ['admin'],
-                  },
-                ],
-              },
-              {
-                name: 'list.table-list',
-                icon: 'table',
-                path: '/list',
-                component: './ListTableList',
-              },
-              {
                 path: '/dashboard',
-                name: '驾驶仓',
+                name: 'dashboard',
                 icon: 'dashboard',
                 routes: [
                   {
@@ -71,6 +49,48 @@
                         component: './Dashboard/admin',
                       },
                     ],
+                  },
+                ],
+              },
+              {
+                path: '/workplace',
+                name: 'workplace',
+                icon: 'tool',
+                routes: [
+                  { path: '/', redirect: '/workplace/index' },
+                  {
+                    path: '/workplace/index',
+                    name: 'work',
+                    icon: 'table',
+                    component: './Workplace',
+                  },
+                  {
+                    path: '/workplace/list',
+                    name: 'list',
+                    icon: 'table',
+                    component: './Workplace/ListTableList',
+                  },
+                  {
+                    path: '/workplace/pro',
+                    name: 'test',
+                    icon: 'table',
+                    component: './Workplace/ProTableList',
+                  },
+                ],
+              },
+              {
+                path: '/admin',
+                name: 'admin',
+                icon: 'crown',
+                component: './Admin',
+                authority: ['admin'],
+                routes: [
+                  {
+                    path: '/admin/sub-page',
+                    name: 'sub-page',
+                    icon: 'smile',
+                    component: './Welcome',
+                    authority: ['admin'],
                   },
                 ],
               },

@@ -8,6 +8,11 @@ const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
+  sula: {
+    locale: {
+      default: 'zh-CN',
+    },
+  },
   antd: {},
   dva: {
     hmr: true,
