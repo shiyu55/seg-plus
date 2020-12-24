@@ -30,7 +30,7 @@ export type TableListParams = {
   desc?: string;
   key?: number;
   pageSize?: number;
-  currentPage?: number;
   filter?: Record<string, any[]>;
   sorter?: Record<string, any>;
+  pageNum?: number;
 };

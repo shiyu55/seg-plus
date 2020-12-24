@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
+import { Button, message, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -10,9 +10,38 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import type { TableListItem } from './data.d';
-import { queryRule, updateRule, addRule, removeRule } from './service';
+import type { TableListParams, TableListItem } from './data.d';
+// import request from '@/utils/request';
+import { request } from 'sula';
 
+async function myQuery(params?: TableListParams) {
+  return request({
+    url:
+      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
+    params,
+  });
+}
+async function updateRule(params?: TableListParams) {
+  return request({
+    url:
+      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
+    params,
+  });
+}
+async function addRule(params?: TableListParams) {
+  return request({
+    url:
+      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
+    params,
+  });
+}
+async function removeRule(params?: TableListParams) {
+  return request({
+    url:
+      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
+    params,
+  });
+}
 /**
  * 添加节点
  * @param fields
@@ -98,118 +127,34 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: (
-        <FormattedMessage
-          id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="规则名称"
-        />
-      ),
-      dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
-      render: (dom, entity) => {
-        return (
-          <a
-            onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
-            }}
-          >
-            {dom}
-          </a>
-        );
-      },
+      dataIndex: 'id',
+      valueType: 'indexBorder',
+      width: 48,
+      title: '序号',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="描述" />,
-      dataIndex: 'desc',
-      valueType: 'textarea',
+      dataIndex: '编码',
+      title: '编码',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleCallNo" defaultMessage="服务调用次数" />,
-      dataIndex: 'callNo',
-      sorter: true,
-      hideInForm: true,
-      renderText: (val: string) =>
-        `${val}${intl.formatMessage({
-          id: 'pages.searchTable.tenThousand',
-          defaultMessage: ' 万 ',
-        })}`,
+      dataIndex: '姓名',
+      title: '姓名',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
-      dataIndex: 'status',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="关闭" />
-          ),
-          status: 'Default',
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="已上线" />
-          ),
-          status: 'Success',
-        },
-        3: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="异常" />
-          ),
-          status: 'Error',
-        },
-      },
+      dataIndex: '起薪单位',
+      title: '起薪单位',
     },
     {
-      title: (
-        <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
-      ),
-      sorter: true,
-      dataIndex: 'updatedAt',
-      valueType: 'dateTime',
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-        if (`${status}` === '0') {
-          return false;
-        }
-        if (`${status}` === '3') {
-          return (
-            <Input
-              {...rest}
-              placeholder={intl.formatMessage({
-                id: 'pages.searchTable.exception',
-                defaultMessage: '请输入异常原因！',
-              })}
-            />
-          );
-        }
-        return defaultRender(item);
-      },
+      dataIndex: '在册单位',
+      title: '在册单位',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
-      dataIndex: 'option',
-      valueType: 'option',
-      render: (_, record) => [
-        <a
-          key="config"
-          onClick={() => {
-            handleUpdateModalVisible(true);
-            setCurrentRow(record);
-          }}
-        >
-          <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
-        </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
-        </a>,
-      ],
+      dataIndex: '现所在单位',
+      title: '现所在单位',
+    },
+    {
+      dataIndex: 'operator',
+      title: '操作',
     },
   ];
 
@@ -236,7 +181,37 @@ const TableList: React.FC = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        // request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        request={async (params, sorter, filter) => {
+          // 表单搜索项会从 params 传入，传递给后端接口。
+          // console.log(params, sorter, filter);
+          const msg = await myQuery({
+            pageNum: params.current,
+            pageSize: params.pageSize,
+            sorter,
+            filter,
+          });
+          // console.log(msg);
+          // return Promise.resolve({ // 需要研究https://www.jianshu.com/p/3c00970841c5
+          return {
+            data: msg.records.map((item: any, index: any) => {
+              return {
+                ...item,
+                id: index + 1,
+                recordId: item.recordId,
+                编码: item.fields.编码,
+                姓名: item.fields.姓名,
+                起薪单位: item.fields.起薪单位,
+                在册单位: item.fields.在册单位,
+                现所在单位: item.fields.现所在单位,
+              };
+            }),
+            success: true,
+            total: msg.total,
+          };
+        }}
+        // postData= {(data: any[]) => any[]}
+
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -307,10 +282,10 @@ const TableList: React.FC = () => {
               ),
             },
           ]}
-          width="m"
+          width="md"
           name="name"
         />
-        <ProFormTextArea width="m" name="desc" />
+        <ProFormTextArea width="md" name="desc" />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {
