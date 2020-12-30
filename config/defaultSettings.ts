@@ -19,6 +19,7 @@ const proSettings: DefaultSettings = {
   iconfontUrl: '',
   splitMenus: true,
   logo: 'https://img.alicdn.com/tfs/TB1GfPJxYH1gK0jSZFwXXc7aXXa-56-56.svg',
+  menu: { locale: false },
 };
 
 export type { DefaultSettings };
