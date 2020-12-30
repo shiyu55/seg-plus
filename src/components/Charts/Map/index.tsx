@@ -6,10 +6,10 @@ import './style.less'; // 这种方式已经载入了所有组件的样式，不
 import 'animate.css';
 import { Drawer, Divider, Col, Row } from 'antd';
 
-interface DescriptionItemProps {
+type DescriptionItemProps = {
   title?: string;
   content?: unknown;
-}
+};
 const DescriptionItem: React.FC<DescriptionItemProps> = ({ title, content }) => (
   <div className="site-description-item-profile-wrapper">
     <p className="site-description-item-profile-p-label">{title}:</p>
@@ -67,7 +67,7 @@ export default class Map extends React.Component {
           map={{
             center: [105.790327, 36.495636],
             pitch: 0,
-            style: 'light', // dark|light|normal|blank
+            style: 'dark', // dark|light|normal|blank
             zoom: 4,
             // autoFit:true
           }}
@@ -76,6 +76,13 @@ export default class Map extends React.Component {
             width: '100%',
             height: '652px',
           }}
+          /*           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }} */
         >
           {data &&
             data.map((item: any) => {

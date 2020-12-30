@@ -10,38 +10,10 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import type { TableListParams, TableListItem } from './data.d';
-// import request from '@/utils/request';
-import { request } from 'sula';
+import type { TableListItem } from './data.d';
+import { SettingOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { queryRule, updateRule, addRule, removeRule } from './service';
 
-async function myQuery(params?: TableListParams) {
-  return request({
-    url:
-      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
-    params,
-  });
-}
-async function updateRule(params?: TableListParams) {
-  return request({
-    url:
-      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
-    params,
-  });
-}
-async function addRule(params?: TableListParams) {
-  return request({
-    url:
-      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
-    params,
-  });
-}
-async function removeRule(params?: TableListParams) {
-  return request({
-    url:
-      'https://api.vika.cn/fusion/v1/datasheets/dstJ2nlzK36HxsJnGc/records?viewId=viwZB4khCnl4P&fieldKey=name',
-    params,
-  });
-}
 /**
  * 添加节点
  * @param fields
@@ -70,7 +42,7 @@ const handleUpdate = async (fields: FormValueType) => {
     await updateRule({
       name: fields.name,
       desc: fields.desc,
-      key: fields.key,
+      recordId: fields.recordId,
     });
     hide();
 
@@ -84,7 +56,7 @@ const handleUpdate = async (fields: FormValueType) => {
 };
 
 /**
- *  删除节点
+ *  删除多节点
  * @param selectedRows
  */
 const handleRemove = async (selectedRows: TableListItem[]) => {
@@ -92,7 +64,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
   if (!selectedRows) return true;
   try {
     await removeRule({
-      key: selectedRows.map((row) => row.key),
+      recordId: selectedRows.map((row) => row.recordId),
     });
     hide();
     message.success('删除成功，即将刷新');
@@ -103,7 +75,26 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
     return false;
   }
 };
+/**
+ *  删除单节点
+ * @param currentRow
+ */
+const singRemove = async (currentRow: TableListItem) => {
+  const hide = message.loading('正在删除');
 
+  try {
+    await removeRule({
+      recordId: currentRow.recordId,
+    });
+    hide();
+    message.success('删除成功，即将刷新');
+    return true;
+  } catch (error) {
+    hide();
+    message.error('删除失败，请重试');
+    return false;
+  }
+};
 const TableList: React.FC = () => {
   /**
    * 新建窗口的弹窗
@@ -129,7 +120,6 @@ const TableList: React.FC = () => {
     {
       dataIndex: 'id',
       valueType: 'indexBorder',
-      width: 48,
       title: '序号',
     },
     {
@@ -153,46 +143,90 @@ const TableList: React.FC = () => {
       title: '现所在单位',
     },
     {
-      dataIndex: 'operator',
       title: '操作',
+      valueType: 'option',
+      render: (text, record, _, action) => [
+        <a
+          key="editable"
+          onClick={() => {
+            action.startEditable?.(record.recordId);
+          }}
+        >
+          编辑
+        </a>,
+        <a
+          key="delete"
+          onClick={async () => {
+            await singRemove(record);
+            actionRef.current?.reloadAndRest?.();
+          }}
+        >
+          删除
+        </a>,
+      ],
     },
   ];
 
   return (
     <PageContainer>
+      <p> </p>
       <ProTable<TableListItem>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',
           defaultMessage: '查询表格',
         })}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="recordId"
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            onClick={() => {
-              handleModalVisible(true);
-            }}
-          >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-          </Button>,
-        ]}
-        // request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        /*         recordCreatorProps={
+          
+          position: 'top',
+          record: newRecord,
+              
+        } */
+        // toolBarRender={() => [
+        toolbar={{
+          actions: [
+            <Button
+              type="primary"
+              key="primary"
+              onClick={() => {
+                handleModalVisible(true);
+              }}
+            >
+              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+            </Button>,
+          ],
+          settings: [
+            {
+              icon: <SettingOutlined />,
+              tooltip: '设置',
+            },
+            {
+              icon: <FullscreenOutlined />,
+              tooltip: '全屏',
+            },
+          ],
+        }}
+        pagination={{
+          pageSize: 10,
+        }}
         request={async (params, sorter, filter) => {
           // 表单搜索项会从 params 传入，传递给后端接口。
           // console.log(params, sorter, filter);
-          const msg = await myQuery({
+          // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
+          // 如果需要转化参数可以在这里进行修改
+          const msg: any = await queryRule({
             pageNum: params.current,
-            pageSize: params.pageSize,
+            ...params,
             sorter,
             filter,
           });
           // console.log(msg);
           // return Promise.resolve({ // 需要研究https://www.jianshu.com/p/3c00970841c5
+          // await getJSON()表示console.log会等到getJSON的promise成功reosolve之后再执行。
           return {
             data: msg.records.map((item: any, index: any) => {
               return {
@@ -226,19 +260,12 @@ const TableList: React.FC = () => {
               <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />{' '}
               <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
-              &nbsp;&nbsp;
-              <span>
-                <FormattedMessage
-                  id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="服务调用次数总计"
-                />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
-              </span>
             </div>
           }
         >
           <Button
+            type="primary"
+            danger
             onClick={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
@@ -246,9 +273,6 @@ const TableList: React.FC = () => {
             }}
           >
             <FormattedMessage id="pages.searchTable.batchDeletion" defaultMessage="批量删除" />
-          </Button>
-          <Button type="primary">
-            <FormattedMessage id="pages.searchTable.batchApproval" defaultMessage="批量审批" />
           </Button>
         </FooterToolbar>
       )}
