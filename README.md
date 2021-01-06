@@ -3,7 +3,7 @@
 ## 特性
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
 - :gem: **优雅美观**：基于 Ant Design 体系精心设计
-- :rocket: **最新技术栈**：使用 React/umi/dva/antd 等前端前沿技术开发
+- :rocket: **最新技术栈**：使用 React/umi/dva&&CONCENT/antd 等前端前沿技术开发
 - :scroll: **模块**: 模块化构建，按需使用，低耦合，高可用。
 - :gear: **配置化**：「产品级」配置框架,语义化的描述 UI 呈现及用户行为动作
 
