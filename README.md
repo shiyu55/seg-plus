@@ -21,3 +21,14 @@
 - **BI 报表引擎**: 配置化，快速创建驾驶舱
 - **P6 计划编排辅助模块**: 基于工时定额和大数据的可视化任务计划编排模块
 - **AWP 高级工作包管理**：基于世界先进的AWP模式，进行项目可视化预演，begin is the end !!!
+
+
+## 感谢以下开源库
+
+- [braft-editor](https://github.com/margox/braft-editor):美观易用的React富文本编辑器，基于draft-js开发
+- [plyr](https://github.com/sampotts/plyr):A simple HTML5, YouTube and Vimeo player
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd):Beautiful and accessible drag and drop for lists with React
+- [react-json-view](https://github.com/mac-s-g/react-json-view):JSON viewer for react,JSON数据展示神器
+- [react-use](https://github.com/streamich/react-use):React Hooks — 👍
+- [vditor](https://github.com/Vanessa219/vditor):易于使用的 Markdown 编辑器，为适配不同的应用场景而生
+- [jsonexport](https://github.com/kaue/jsonexport):{} → 📄 it's easy to convert JSON to CSV
