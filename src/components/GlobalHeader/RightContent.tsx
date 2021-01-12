@@ -7,6 +7,7 @@ import { connect, SelectLang } from 'umi';
 import type { ConnectState } from '@/models/connect';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
+import NoticeIconView from './NoticeIconView';
 import styles from './index.less';
 
 export type GlobalHeaderRightProps = {
@@ -20,7 +21,7 @@ const ENVTagColor = {
   pre: '#87d068',
 };
 
-const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
+const GlobalHeaderRight: React.FC<GlobalHeaderRightProps> = (props) => {
   const { theme, layout } = props;
   let className = styles.right;
 
@@ -53,6 +54,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
         //   //console.log('input', value);
         // }}
       />
+      <NoticeIconView />
       <Tooltip title="使用文档">
         <a
           style={{

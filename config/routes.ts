@@ -10,7 +10,7 @@
           {
             name: 'login',
             path: '/user/login',
-            component: './user/login',
+            component: './User/login',
           },
         ],
       },
@@ -34,30 +34,8 @@
                 component: './Welcome',
               },
               {
-                path: '/admin',
-                name: 'admin',
-                icon: 'crown',
-                component: './Admin',
-                authority: ['admin'],
-                routes: [
-                  {
-                    path: '/admin/sub-page',
-                    name: 'sub-page',
-                    icon: 'smile',
-                    component: './Welcome',
-                    authority: ['admin'],
-                  },
-                ],
-              },
-              {
-                name: 'list.table-list',
-                icon: 'table',
-                path: '/list',
-                component: './ListTableList',
-              },
-              {
                 path: '/dashboard',
-                name: '驾驶仓',
+                name: 'dashboard',
                 icon: 'dashboard',
                 routes: [
                   {
@@ -82,6 +60,54 @@
                     name: '分公司经营部编辑',
                     path: '/dashboard/manage/table',
                     component: './Dashboard/manage/table',
+                  },
+                ],
+              },
+              {
+                path: '/workplace',
+                name: 'workplace',
+                icon: 'tool',
+                routes: [
+                  { path: '/', redirect: '/workplace/index' },
+                  {
+                    path: '/workplace/index',
+                    name: 'work',
+                    icon: 'table',
+                    component: './Workplace',
+                  },
+                  {
+                    path: '/workplace/sula',
+                    name: 'SulaTable',
+                    icon: 'table',
+                    component: './Workplace/SulaTableList',
+                  },
+                  {
+                    path: '/workplace/pro',
+                    name: 'ProTable',
+                    icon: 'table',
+                    component: './Workplace/ProTableList',
+                  },
+                  {
+                    path: '/workplace/model',
+                    name: 'ModelTable',
+                    icon: 'table',
+                    component: './Workplace/ModelTableList',
+                  },
+                ],
+              },
+              {
+                path: '/admin',
+                name: 'admin',
+                icon: 'crown',
+                component: './Admin',
+                authority: ['admin'],
+                routes: [
+                  {
+                    path: '/admin/sub-page',
+                    name: 'sub-page',
+                    icon: 'smile',
+                    component: './Welcome',
+                    authority: ['admin'],
                   },
                 ],
               },
