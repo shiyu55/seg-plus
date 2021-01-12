@@ -71,6 +71,17 @@
                         component: './Dashboard/admin',
                       },
                     ],
+                    
+                  },
+                  {
+                    name: '分公司经营部',
+                    path: '/dashboard/manage',
+                    component: './Dashboard/manage/index',
+                  },
+                  {
+                    name: '分公司经营部编辑',
+                    path: '/dashboard/manage/table',
+                    component: './Dashboard/manage/table',
                   },
                 ],
               },
