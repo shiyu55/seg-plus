@@ -5,23 +5,24 @@
     routes: [
       {
         path: '/user',
-        component: '../layouts/UserLayout',
+       /*  component: '../layouts/UserLayout', */
         routes: [
           {
             name: 'login',
             path: '/user/login',
             component: './User/login',
           },
+
         ],
       },
       {
         path: '/',
-        component: '../layouts/SecurityLayout',
+        // component: '../layouts/SecurityLayout',
         routes: [
           {
             path: '/',
             component: '../layouts/BasicLayout',
-            authority: ['admin', 'user'],
+            // authority: ['admin', 'user'],
             routes: [
               {
                 path: '/',
@@ -32,7 +33,14 @@
                 name: 'welcome',
                 icon: 'smile',
                 component: './Welcome',
+              },          
+              {
+                path: '/personal',
+                name: 'personal',
+                icon: 'smile',
+                component: './user/settings/personal',
               },
+
               {
                 path: '/dashboard',
                 name: 'dashboard',
@@ -47,6 +55,19 @@
                         name: '分公司行政部',
                         path: '/dashboard/admin/admin',
                         component: './Dashboard/admin',
+                      },
+                    ],
+                    
+                  },
+                  {
+                    name: '施工部',
+                    path: '/dashboard/construction',
+
+                    routes: [
+                      {
+                        name: '钢结构安装',
+                        path: '/dashboard/construction/steelstructure',
+                        component: './Dashboard/steelstructure',
                       },
                     ],
                     
@@ -75,12 +96,7 @@
                     icon: 'table',
                     component: './Workplace',
                   },
-                  {
-                    path: '/workplace/sula',
-                    name: 'SulaTable',
-                    icon: 'table',
-                    component: './Workplace/SulaTableList',
-                  },
+                  
                   {
                     path: '/workplace/pro',
                     name: 'ProTable',

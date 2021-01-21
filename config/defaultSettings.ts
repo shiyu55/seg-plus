@@ -3,6 +3,7 @@ import { Settings as ProSettings } from '@ant-design/pro-layout';
 type DefaultSettings = Partial<ProSettings> & {
   pwa: boolean;
   logo: string;
+  globalPrefix:string;
 };
 
 const proSettings: DefaultSettings = {
@@ -20,6 +21,7 @@ const proSettings: DefaultSettings = {
   splitMenus: true,
   logo: 'https://img.alicdn.com/tfs/TB1GfPJxYH1gK0jSZFwXXc7aXXa-56-56.svg',
   menu: { locale: false },
+  globalPrefix: '/api/v1.0',
 };
 
 export type { DefaultSettings };

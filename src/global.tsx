@@ -4,14 +4,7 @@ import React from 'react';
 import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
-import { Icon, request } from 'sula';
-import {
-  LoadingOutlined,
-  EditOutlined,
-  EyeOutlined,
-  DeleteOutlined,
-  CopyOutlined,
-} from '@ant-design/icons';
+
 
 const { pwa } = defaultSettings;
 const isHttps = document.location.protocol === 'https:';
@@ -93,12 +86,6 @@ if (pwa) {
   }
 }
 
-Icon.iconRegister({
-  loading: LoadingOutlined,
-  edit: EditOutlined,
-  eye: EyeOutlined,
-  delete: DeleteOutlined,
-  copy: CopyOutlined,
-});
 
-request.defaults.headers['Authorization'] = 'Bearer uskNpdJMKEZALZrxhm4Xc2v';
+
+

@@ -3,23 +3,34 @@ import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
+import platformConfig from './platform';
 
 const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
-  sula: {
-    locale: {
-      default: 'zh-CN',
-    },
+  base: '/',
+  // 静态资源路径
+  publicPath: './',
+  history: {
+    // 静态托管部署，需要使用 hash 模式
+    type: 'hash',
+    // type: 'browser',
+  },
+  // 定义变量
+  define: {
+    ...platformConfig.define,
+  },
+  layout: {
+    name: platformConfig.layout.name,
+    locale: false,
+    siderWidth: 208,
   },
   antd: {},
   dva: {
     hmr: true,
   },
-  history: {
-    type: 'browser',
-  },
+ 
   locale: {
     default: 'zh-CN',
     antd: true,
@@ -48,4 +59,5 @@ export default defineConfig({
     basePath: '/',
   },
   esbuild: {},
+
 });

@@ -8,7 +8,12 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'https://seg.plus/tcb-ext-cms-service-container',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
+    '/fusion/': {
+      target: 'https://api.vika.cn',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
